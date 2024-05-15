@@ -6,23 +6,34 @@ import { DatabaseService } from 'src/database/database.service';
 @Injectable()
 export class ParticipantService {
   constructor(private readonly dataBaseService: DatabaseService) {}
+
   create(createParticipantDto: CreateParticipantDto) {
-    return 'This action adds a new participant';
+    return this.dataBaseService.participant.create({
+      data: createParticipantDto,
+    });
   }
 
   findAll() {
-    return `This action returns all participant`;
+    return this.dataBaseService.participant.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} participant`;
+    return this.dataBaseService.participant.findUnique({
+      where: { id },
+    });
   }
 
   update(id: number, updateParticipantDto: UpdateParticipantDto) {
-    return `This action updates a #${id} participant`;
+    return this.dataBaseService.participant.update({
+      where: { id },
+      data: updateParticipantDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} participant`;
+    return this.dataBaseService.participant.update({
+      where: { id },
+      data: { deletedAt: new Date() },
+    });
   }
 }

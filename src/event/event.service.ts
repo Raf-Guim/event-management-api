@@ -6,23 +6,37 @@ import { DatabaseService } from 'src/database/database.service';
 @Injectable()
 export class EventService {
   constructor(private readonly dataBaseService: DatabaseService) {}
+
   create(createEventDto: CreateEventDto) {
-    return 'This action adds a new event';
+    return this.dataBaseService.event.create({
+      data: createEventDto,
+    });
   }
 
   findAll() {
-    return `This action returns all event`;
+    return this.dataBaseService.event.findMany({
+      include: { Participant: true },
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} event`;
+    return this.dataBaseService.event.findUnique({
+      where: { id },
+      include: { Participant: true },
+    });
   }
 
   update(id: number, updateEventDto: UpdateEventDto) {
-    return `This action updates a #${id} event`;
+    return this.dataBaseService.event.update({
+      where: { id },
+      data: updateEventDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} event`;
+    return this.dataBaseService.event.update({
+      where: { id },
+      data: { deletedAt: new Date() },
+    });
   }
 }
