@@ -62,9 +62,10 @@ export class EventService {
 
       if (participants && participants.length > 0) {
         for (const participant of participants) {
-          await dataBaseService.participant.update({
-            where: { email: participant.email },
-            data: { ...participant, eventId: id },
+          await dataBaseService.participant.upsert({
+            where: { id: participant.id },
+            create: { ...participant, eventId: id },
+            update: { ...participant, eventId: id },
           });
         }
       }

@@ -3,9 +3,17 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateParticipantEventDto {
   @ApiProperty({
+    description: 'ID of the participant',
+    example: 1,
+    required: true,
+  })
+  @IsString()
+  id: number;
+
+  @ApiProperty({
     description: 'Name of the participant',
     example: 'John Doe',
-    required: false,
+    required: true,
   })
   @IsString()
   name: string;
@@ -13,7 +21,7 @@ export class UpdateParticipantEventDto {
   @ApiProperty({
     description: 'Email of the participant',
     example: 'john.doe@email.com',
-    required: false,
+    required: true,
   })
   @IsEmail()
   email: string;
