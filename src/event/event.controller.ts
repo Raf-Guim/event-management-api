@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
@@ -19,8 +21,12 @@ export class EventController {
 
   @Post()
   @ApiOperation({ summary: 'Create a new event' })
-  create(@Body() createEventDto: CreateEventDto) {
-    return this.eventService.create(createEventDto);
+  async create(@Body() createEventDto: CreateEventDto) {
+    try {
+      return await this.eventService.create(createEventDto);
+    } catch (error) {
+      throw new HttpException('Failed to create event', HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Get()
@@ -37,13 +43,24 @@ export class EventController {
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update an event by id' })
-  update(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto) {
-    return this.eventService.update(+id, updateEventDto);
+  async update(
+    @Param('id') id: number,
+    @Body() updateEventDto: UpdateEventDto,
+  ) {
+    try {
+      return await this.eventService.update(+id, updateEventDto);
+    } catch (error) {
+      throw new HttpException('Failed to update event', HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete an event by id' })
-  remove(@Param('id') id: string) {
-    return this.eventService.remove(+id);
+  async remove(@Param('id') id: number) {
+    try {
+      return await this.eventService.remove(+id);
+    } catch (error) {
+      throw new HttpException('Failed to delete event', HttpStatus.BAD_REQUEST);
+    }
   }
 }

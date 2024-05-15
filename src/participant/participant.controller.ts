@@ -19,8 +19,11 @@ export class ParticipantController {
 
   @Post()
   @ApiOperation({ summary: 'Create a new participant' })
-  create(@Body() createParticipantDto: CreateParticipantDto) {
-    return this.participantService.create(createParticipantDto);
+  create(
+    @Body() createParticipantDto: CreateParticipantDto,
+    @Body('eventId') eventId: number,
+  ) {
+    return this.participantService.create(createParticipantDto, eventId);
   }
 
   @Get()

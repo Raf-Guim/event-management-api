@@ -7,5 +7,6 @@ import { DatabaseModule } from 'src/database/database.module';
   imports: [DatabaseModule],
   controllers: [ParticipantController],
   providers: [ParticipantService],
+  exports: [ParticipantService],
 })
 export class ParticipantModule {}

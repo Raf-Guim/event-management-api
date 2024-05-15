@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsDate, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { UpdateParticipantDto } from '../../participant/dto/update-participant.dto';
+import { UpdateParticipantEventDto } from 'src/participant/dto/update-participant-event.dto';
 
 export class UpdateEventDto {
   @ApiProperty({
@@ -44,11 +44,11 @@ export class UpdateEventDto {
 
   @ApiProperty({
     description: 'The participants of the event',
-    type: [UpdateParticipantDto],
+    type: [UpdateParticipantEventDto],
     required: false,
   })
   @IsOptional()
   @ValidateNested({ each: true })
-  @Type(() => UpdateParticipantDto)
-  participants?: UpdateParticipantDto[];
+  @Type(() => UpdateParticipantEventDto)
+  participants?: UpdateParticipantEventDto[];
 }
