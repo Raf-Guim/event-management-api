@@ -8,32 +8,22 @@ export class ParticipantService {
   constructor(private readonly dataBaseService: DatabaseService) {}
 
   create(createParticipantDto: CreateParticipantDto) {
-    return this.dataBaseService.participant.create({
-      data: createParticipantDto,
-    });
+    return 'This action adds a new participant';
   }
 
   findAll() {
-    return this.dataBaseService.participant.findMany();
+    return `This action returns all participant`;
   }
 
   findOne(id: number) {
-    return this.dataBaseService.participant.findUnique({
-      where: { id },
-    });
+    return `This action returns a #${id} participant`;
   }
 
   update(id: number, updateParticipantDto: UpdateParticipantDto) {
-    return this.dataBaseService.participant.update({
-      where: { id },
-      data: updateParticipantDto,
-    });
+    return `This action updates a #${id} participant`;
   }
 
   remove(id: number) {
-    return this.dataBaseService.participant.update({
-      where: { id },
-      data: { deletedAt: new Date() },
-    });
+    return `This action removes a #${id} participant`;
   }
 }

@@ -8,35 +8,22 @@ export class EventService {
   constructor(private readonly dataBaseService: DatabaseService) {}
 
   create(createEventDto: CreateEventDto) {
-    return this.dataBaseService.event.create({
-      data: createEventDto,
-    });
+    return 'This action adds a new event';
   }
 
   findAll() {
-    return this.dataBaseService.event.findMany({
-      include: { Participant: true },
-    });
+    return `This action returns all event`;
   }
 
   findOne(id: number) {
-    return this.dataBaseService.event.findUnique({
-      where: { id },
-      include: { Participant: true },
-    });
+    return `This action returns a #${id} event`;
   }
 
   update(id: number, updateEventDto: UpdateEventDto) {
-    return this.dataBaseService.event.update({
-      where: { id },
-      data: updateEventDto,
-    });
+    return `This action updates a #${id} event`;
   }
 
   remove(id: number) {
-    return this.dataBaseService.event.update({
-      where: { id },
-      data: { deletedAt: new Date() },
-    });
+    return `This action removes a #${id} event`;
   }
 }
