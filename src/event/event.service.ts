@@ -28,21 +28,21 @@ export class EventService {
 
       return dataBaseService.event.findUnique({
         where: { id: event.id },
-        include: { participants: true },
+        include: { participants: { where: { deletedAt: null } } },
       });
     });
   }
 
   findAll() {
     return this.dataBaseService.event.findMany({
-      include: { participants: true },
+      include: { participants: { where: { deletedAt: null } } },
     });
   }
 
   findOne(id: number) {
     return this.dataBaseService.event.findUnique({
       where: { id },
-      include: { participants: true },
+      include: { participants: { where: { deletedAt: null } } },
     });
   }
 
@@ -72,7 +72,7 @@ export class EventService {
 
       return dataBaseService.event.findUnique({
         where: { id: event.id },
-        include: { participants: true },
+        include: { participants: { where: { deletedAt: null } } },
       });
     });
   }
