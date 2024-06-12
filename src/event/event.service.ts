@@ -35,14 +35,13 @@ export class EventService {
 
   findAll() {
     return this.dataBaseService.event.findMany({
-      include: { participants: { where: { deletedAt: null } } },
+      where: { deletedAt: null },
     });
   }
 
   findOne(id: number) {
     return this.dataBaseService.event.findUnique({
-      where: { id },
-      include: { participants: { where: { deletedAt: null } } },
+      where: { id, deletedAt: null },
     });
   }
 
